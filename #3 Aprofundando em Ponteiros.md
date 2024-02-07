@@ -1,17 +1,17 @@
-## 3 Aprofundando em Ponteiros
+## 3. Aprofundando em Ponteiros
 
-Neste vídeo o professor mostra na prática o que foi introduzido no vídeo anterior.
+Neste vídeo, o professor mostra na prática o que foi introduzido no vídeo anterior.
 
-- É explicado que um ponteiro ocupa 8 bytes, independente do tipo que ele aponta, segundo o chatGPT, isso ocorre em sistemas com arquitetura 64bits, já em sistemas com arquitetura 32bits um ponteiro ocupa 4bytes independente do tipo que ele aponta.
-- Assim como uma variável normal, uma variável do tipo ponteiro, quando não atribuído um valor em sua declaração, conterá lixo de memória, o que pode ocasionar bugs, _é indicado inicializar as variáveis do tipo ponteiro com NULL_.
+- É explicado que um ponteiro ocupa 8 bytes, independente do tipo que ele aponta. Segundo o ChatGPT, isso ocorre em sistemas com arquitetura de 64 bits; já em sistemas com arquitetura de 32 bits, um ponteiro ocupa 4 bytes, independentemente do tipo que ele aponta.
+- Assim como uma variável normal, uma variável do tipo ponteiro, quando não é atribuído um valor em sua declaração, conterá lixo de memória, o que pode ocasionar bugs. _É indicado inicializar as variáveis do tipo ponteiro com NULL._
 - **NULL** é uma palavra reservada da linguagem C que aponta para o nada.
 
-O vídeo é mais _hands-on_, então segue um código para análise e estudo.
+O vídeo é mais _hands-on_; portanto, segue um código para análise e estudo.
 
 ```c
 #include <stdio.h>
 
-int main(){
+int main() {
   int var_normal = 10;
   int *var_ponteiro_lixo;
   int *var_ponteiro_null = NULL;
@@ -46,5 +46,4 @@ int main(){
 // &var_normal: 0x7ffd818273f4 | var_normal: 50
 // &var_ponteiro_lixo: 0x7ffd818273f8 | var_ponteiro_lixo: 0x7ffd818273f4 | *var_ponteiro_lixo: 50
 // &var_ponteiro_null: 0x7ffd81827400 | var_ponteiro_null: 0x7ffd818273f4 | *var_ponteiro_null: 50
-
 ```

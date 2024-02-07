@@ -1,31 +1,31 @@
-## 6 Ponteiro de Ponteiros
+## 6. Ponteiro de Ponteiros
 
-Ponteiros de ponteiros é um tipo de variável que guardo o endereço de um ponteiro, é declarado usando dois asteríscos antes do nome da variável.
+Ponteiro de ponteiros é um tipo de variável que guarda o endereço de um ponteiro, sendo declarado usando dois asteriscos antes do nome da variável.
 
-- int \*p;
-- int \*\*p = &p;
+- `int *p;`
+- `int **p = &p;`
 
-Tentar atribuir a um ponteiro de ponteiro um outro valor que não seja um endereço de ponteiro do mesmo tipo do ponteiro de ponteiro, acaretará em um erro, assim como é impossível adicionar algo diferente de um endereço de uma variável do mesmo tipo de um ponteiro a um ponteiro de variável;
+Tentar atribuir a um ponteiro de ponteiro um outro valor que não seja um endereço de ponteiro do mesmo tipo acarretará em um erro, assim como é impossível adicionar algo diferente de um endereço de uma variável do mesmo tipo de um ponteiro a um ponteiro de variável:
 
-- char c = 'A';
-- int i = 10;
-- int \*p = c; ❌: não é um endereço de variável
-- int \*p = i; ❌: não é um endereço de variável
-- int \*p = &c; ❌: o endereço não é de uma variável do mesmo tipo
-- int \*p = &c; ✅: é um endereço e é do mesmo tipo
+- `char c = 'A';`
+- `int i = 10;`
+- `int *p = c;` ❌: não é um endereço de variável
+- `int *p = i;` ❌: não é um endereço de variável
+- `int *p = &c;` ❌: o endereço não é de uma variável do mesmo tipo
+- `int *p = &i` ✅: é um endereço e é do mesmo tipo
 
-- int \*\*p = p; ❌: não é um endereço de ponteiro
-- int \*\*p = \*p; ❌: não é um endereço de ponteiro
-- int \*\*p = &p; ✅: é um endereço e é do mesmo tipo
+- `int **p2 = p;` ❌: não é um endereço de ponteiro
+- `int **p2 = *p;` ❌: não é um endereço de ponteiro
+- `int **p2 = &p;` ✅: é um endereço e é do mesmo tipo
 
-O apontamento na linguagem C é indefinido, você pode sempre apontar o endereço de uma variável, ponteiro, ponteiro de ponteiro, ponteiro de ponteiro de ponteiro, etc. Sendo necessário apenas se atentar que o tipo que recebe o endereço deve um **"Ponteiro Superior"**, ou seja, se o endereço é de um ponteiro \*\*, a variável que irá receber o endereço do ponteiro deve ser \*\*\*.
+O apontamento na linguagem C é indefinido; você pode sempre apontar o endereço de uma variável, ponteiro, ponteiro de ponteiro, ponteiro de ponteiro de ponteiro, etc. Sendo necessário apenas se atentar que o tipo que recebe o endereço deve ser um **"Ponteiro Superior"**, ou seja, se o endereço é de um ponteiro \*\*, a variável que irá receber o endereço do ponteiro deve ser \*\*\*.
 
-Outro ponto interessante e também simples de entender é sobre a ecuperação de valores
+Outro ponto interessante e também simples de entender é sobre a recuperação de valores:
 
-- Se declaramos um ponteiro de ponteiro, usar um asterísco irá trazer o valor do ponteiro apontado, ou seja, o endereço da variável que o ponteiro aponta.
-- Se quisermos o valor da variável é necessário apontar também para o endereço que o ponteiro aponta.
-- Em resumo, se eu quiser obter o valor da variável que iniciou o apontamento, eu tenho que usar a mesma quantidade de asteríscos que o ponteiro em questão.
-- No código abaixo isso pode ser melhor observado e entendido.
+- Se declaramos um ponteiro de ponteiro, usar um asterisco irá trazer o valor do ponteiro apontado, ou seja, o endereço da variável que o ponteiro aponta.
+- Se quisermos o valor da variável, é necessário apontar também para o endereço que o ponteiro aponta.
+- Em resumo, se eu quiser obter o valor da variável que iniciou o apontamento, eu tenho que usar a mesma quantidade de asteriscos que o ponteiro em questão.
+- No código abaixo, isso pode ser melhor observado e entendido.
 
 ```c
 #include <stdio.h>

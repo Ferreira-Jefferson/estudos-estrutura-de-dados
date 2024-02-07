@@ -85,7 +85,7 @@ int main(){
 
 - "####" são representações de lixo da memória
 - o **"s"** antes do valor na linha 3 e 4 representa que este valor foi recebido pela função _scanf_
-  - **scanf**: intercepta valores digitados pelo usuário e insere nas variáveis `scanf("%d %d", &x, &y);`
+  - **scanf**: intercepta valores digitados pelo usuário e insere nas variáveis que foram passadas por referência`scanf("%d %d", &x, &y);`
   - sobre a função scanf, note que ela ao contrário do printf, recebe entre aspas o tipo ou tipos que ela irá atribuir a variável passada após as aspas
   - as variáveis são passadas por referência, por conta disso fazemos o uso do _&_
 - Qual será o resultado do printf?
