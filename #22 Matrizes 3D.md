@@ -97,8 +97,15 @@ int main() {
         }
         puts("");
     }
+
+    for(int k=0; k < nfatias; k++){
+        for(int i=0; i < nlinhas; i++){
+            free(m[k][i]);
+        }
+        free(m[k]);
+    }
+    free(m);
+    m = NULL;
   return 0;
 }
 ```
-
-- A free não foi executad, isso serávisto próximas aula

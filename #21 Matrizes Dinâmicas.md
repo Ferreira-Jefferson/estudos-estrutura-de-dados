@@ -65,11 +65,10 @@ void print_values_matriz(int **m, int nrows, int ncols){
 
 void free_matriz(int ***m, int nrows) {
     for(int i=0; i < nrows; i++){
-        free(m[i]);
-        **m[i] = 50;
+        free(**m[i]);
     }
-    free(m);
-    *m = 60;
+    free(**m);
+    **m = NULL;
 }
 
 int main() {
@@ -96,5 +95,3 @@ int main() {
   return 0;
 }
 ```
-
-**A free_matriz(&m, nrows); foi feita sem correção, a desalocação será vista depois, mas aproveitei para testar, após o professor mostrar como se faz, voltarei para corrigir caso tenha algo errado**
