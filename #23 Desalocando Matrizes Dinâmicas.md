@@ -41,18 +41,30 @@ int main() {
 }
 ```
 
-- Não foi dado nenhum exemplo no vídeo, mas ao arrumar o exercício 21 me dei conta que quando fazemos a desalocação por meio de uma função, devemos subir um nível de ponteiro, para que possamos trabalhar diretamente com o ponteiro que desejamos desalocar e neste, usamos a quantidade de asteríscos com que o ponteiro que passamos foi criado
+- Não foi dado nenhum exemplo no vídeo, mas ao arrumar o exercício 21 me dei conta que quando fazemos a desalocação por meio de uma função, devemos subir um nível de ponteiro, para que possamos trabalhar diretamente com o ponteiro que desejamos desalocar e neste.
+  - Fiquei quebrando a cabeça para entender o porque de `int** aux=*mt;` funcionar, mas usar o *mt diretamente não ia.
+    Depois que entendi que o o *mt funciona no free, e que o erro de segmentation fault estava dando dentro do loop.
+    Depois de muito teste ví que (*m)[i] funcionava e o problema era a precedência..quando uso *mt[i] ele faz a lógica de ponteiros entre mt + i e depois tentava pegar o conteúdo do endereço resultante, sendo que o mt é uma variável local, que só existe na função, para que dê certo é necessário, antes da lógica de ponteiro, pegar o endereço que veio pelo parâmetro e só então aplicar a lógica de ponteiros.
 
 ```c
 #include <stdio.h>
 #include <stdlib.h>
 
-void free_matriz(int ***m, int nrows) {
+void free_matriz_aux(int** *mt, int nrows) {
+    int** aux = *mt;
     for(int i=0; i < nrows; i++){
-        free(**m[i]);
+        free(aux[i]);
     }
-    free(**m);
-    **m = NULL;
+    free(aux);
+    *mt = NULL;
+}
+
+void free_matriz(int ** *mt, int nrows) {
+    for(int i=0; i < nrows; i++){
+        free((*mt)[i]);
+    }
+    free(*mt);
+    *mt = NULL;
 }
 
 int main() {

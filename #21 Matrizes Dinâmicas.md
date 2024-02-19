@@ -63,12 +63,13 @@ void print_values_matriz(int **m, int nrows, int ncols){
     puts("");
 }
 
-void free_matriz(int ***m, int nrows) {
+void free_matriz(int** *m, int nrows) {
+    int **aux = *m;
     for(int i=0; i < nrows; i++){
-        free(**m[i]);
+        free(aux[i]);
     }
-    free(**m);
-    **m = NULL;
+    free(aux);
+    *m = NULL;
 }
 
 int main() {
