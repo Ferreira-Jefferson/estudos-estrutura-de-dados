@@ -17,8 +17,8 @@
     - O **sistema pega os dados sequêncialmente**, a partir da variável que ele foi buscar inicialemente.
   - Por conta do sistema pegar os dados sequêncialmente, layouts que manipulam os dados de maneira sequêncial, são mais eficientes
 
-    - ![Column-Major Order](./assets/column-major order.png)
-    - ![Row-Major Order](./assets/row-major order.png)
+    - ![Column-Major Order](./assets/column-major-order.png)
+    - ![Row-Major Order](./assets/row-major-order.png)
 
     Como pode ser visto na imagem **Column-Major Order**, a leitura vai do _a11_ para o _a21_, o problema é que o cache copia da ram as variáveis na sequência que são _a12_ e _a13_, supondo que o cache copia somente 3 variáveis por vez.
 
