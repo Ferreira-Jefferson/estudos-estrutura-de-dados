@@ -3,11 +3,11 @@
 - Struct ou registro é um "pacote" de variáveis que pode conter tipos diferentes, tem como objetivo agrupar um conjunto de dados que represente algo mais concreto
 - Em última análise a struct é um novo tipo de dados que nós mesmos criamos, um tipo de dados personalizado, que ao invés de receber apenas um valor como `int x = 10;`, pode receber **N** valores.
 
-  - Ex: Uma pessoa tem diversos atributos, como nome, idade, peso, cada um desses atributos se representados no código deveria ser armazenados em uma variável de tipo diferentes.
+  - Ex: Uma pessoa tem diversos atributos como nome, idade, peso, cada um desses atributos se representados no código deveria ser armazenado em uma variável de tipo diferente.
     - nome: char[]
     - idade: int
     - peso: double
-  - para apenas um dado fazer dessa meneira não teria maiores problemas, mas se tivermos duas pessoas, teriamos que declarar novas variáveis e como elas não poderiam ter o mesmo nome, teriam que ser criadas abordagem de nomenclatura para não se perder nos nomes das variáveis:
+  - para apenas um dado fazer dessa maneira não teria maiores problemas, mas se tivermos duas pessoas, teríamos que declarar novas variáveis e como elas não poderiam ter o mesmo nome, teriam que ser criadas abordagem de nomenclatura para não se perder nos nomes das variáveis:
 
     ```
       char nome_pessoa1[];
@@ -21,7 +21,7 @@
 
   - Como pode ser observado, quando mais dados temos que representar, mais teríamos que criar novas variáveis e é para que isso não ocorra que usamos as structs
 
-- A criação de uma struct segue o seguinte padrão, palavra reservada
+- A criação de uma struct segue o seguinte padrão
 
 ---
 
@@ -58,7 +58,7 @@ struct ?nome_struct {
 
 - Note que alguns nomes começam com o ponto de interrogação (?), eles são campos opcionais
 
-  - ?nome_struct: uma struct não necessáriamente precisa ter um nome, ela pode ser uma struct anônima, neste caso é necessário criar ao menos uma variável, ela até pode ser útil em algumas situações, mas não e muito utilizada pelo fato de que você não consegue reutilizá-la, a única variável que terá seu tipo será a variável ou as variáveis definida em sua criação.
+  - ?nome_struct: uma struct não necessariamente precisa ter um nome, ela pode ser uma struct anônima, neste caso é necessário criar ao menos uma variável, ela até pode ser útil em algumas situações, mas não e muito utilizada pelo fato de que você não consegue reutilizá-la, a única variável que terá seu tipo será a variável ou as variáveis definida em sua criação.
 
     ```
     struct {
@@ -72,7 +72,7 @@ struct ?nome_struct {
 
     - Note que produto_x não é o nome da struct, mas sim a variável de uma struct anônima, logo seu uso é direto.
 
-  - ?tipo_atributo2 nome_atributo2: apesar de uma struct ser criada para agrupar atributos comuns de algo, ela pode ser criada com apenas uma atributo.
+  - ?tipo_atributo2 nome_atributo2: apesar de uma struct ser criada para agrupar atributos comuns de algo, ela também pode ser criada com apenas uma atributo.
 
   ```
     struct Money {
@@ -125,7 +125,7 @@ struct ?nome_struct {
   ```
 
   - typedef: define a struct como um tipo de dados
-  - \_aluno: nome da struct, o underline (**\_**) não é obrigatório, mas é uma convensão para desentimular o uso da struct da maneira padrão `struct nome_struct`
+  - \_aluno: nome da struct, o underline (**\_**) não é obrigatório, mas é uma convenção para desentimular o uso da struct da maneira padrão `struct nome_struct`
   - Aluno: alias ou apelido da struct, é ele que iremos querer usar na declaração das variáveis
     - ⚠️: Quando usamos o typedef todos os nomes que colocamos após a última chave da struct (**}**), não são variáveis, mas sim alias da struct, sendo que podemos declarar **N** alias diferentes para uma mesma struct
       ```
@@ -150,4 +150,17 @@ struct ?nome_struct {
     Graduando jose;
 
     struct _aluno zezinho; // Desestimulado: O ideal é seguir o padrão e usar somente os alias
+  ```
+
+- Outra maneira de utlizar o typedef é para tornar struct anônimas em structs que podem ser reutilizadas, além de eliminar o uso de convenções para informar que algo é opcional ou que não deve ser usado.
+
+  ```
+    typedef struct {
+      char nome[50];
+      double nota;
+      int idade;
+    } Aluno;
+
+    Aluno pedro;
+    Aluno paulo = {.nome = "Paulo", .nota = 10, .idade = 18};
   ```
