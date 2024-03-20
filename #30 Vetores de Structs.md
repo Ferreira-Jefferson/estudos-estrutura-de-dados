@@ -2,8 +2,6 @@
 
 A definição de vetores quando trabalhamos com struct não sofre alteração, sendo possível trabalhar com vetores estáticos de structs ou vetores dinâmicos.
 
-# Alocação estática de um vetor de struct
-
 ```c
 #include <stdio.h>
 #include <string.h>
@@ -107,7 +105,7 @@ int main() {
 ```
 
 - Esta solução nos permite identificar que o vetor de alunos foi alocado dinâmicamene o que impede eventuais erros e bugs
-- Mas ainda há algo que dá para melhorar, note que temos todo um processo repetitivo na criação e alocação dos vetores, por quê não transformamos o vetor de alunos de dado?
+- Mas ainda há algo que dá para melhorar, note que temos todo um processo repetitivo na criação e alocação dos vetores, por quê não transformamos o vetor de alunos em um tipo personalizado?
 
 ```c
 #include <stdio.h>
@@ -122,45 +120,57 @@ typedef struct {
 typedef struct {
   Aluno **vet;
   int size;
+  int max;
 } VetorAlunos;
 
-VetorAlunos* criaVetorAlunos(int tamanho) {
-  Aluno** alunos = calloc(tamanho, sizeof(Aluno*));
-  VetorAlunos* vetor_alunos = calloc(1, sizeof(VetorAlunos));
-  vetor_alunos->vet = alunos;
-  vetor_alunos->size = tamanho;
-  return vetor_alunos;
+Aluno* criarAluno(char *nome, int idade) {
+    Aluno *aluno = calloc(1, sizeof(Aluno));
+    strcpy(aluno->nome, nome);
+    aluno->idade = idade;
+    return aluno;
 }
 
-Aluno* criaAluno(const char nome[], int idade){
-  Aluno *aluno = calloc(1, sizeof(Aluno));
-  strcpy(aluno->nome, nome);
-  aluno->idade = idade;
-  return aluno;
+VetorAlunos* criarVetorAluno(int qtdAlunos) {
+    VetorAlunos* vetAluno = calloc(1, sizeof(VetorAlunos));
+    vetAluno->vet = calloc(qtdAlunos, sizeof(Aluno*));
+    vetAluno->size = 0;
+    vetAluno->max = qtdAlunos;
+    return vetAluno;
 }
 
-VetorAlunos* popularVetorAlunos(VetorAlunos *vetor_alunos, const char *nomes[], const int idades[]) {
+void adicionaAlunoNoVetor(VetorAlunos** vetAluno, Aluno* aluno) {
+    VetorAlunos* vetAux = *vetAluno;
+    int index = vetAux->size;
+    vetAux->vet[index] = aluno;
+    vetAux->size = index + 1;
+}
 
-  for(int i=0; i < vetor_alunos->size; i++) {
-    vetor_alunos->vet[i] = criaAluno(nomes[i], idades[i]);
-  }
-  return vetor_alunos;
+void freeVetorAlunos(VetorAlunos** vetAlunos){
+    VetorAlunos* vetAux = *vetAlunos;
+    for(int i=0; i < vetAux->size; i++){
+        free(vetAux->vet[i]);
+    }
+    free(vetAux);
+    *vetAlunos = NULL;
 }
 
 int main() {
-  VetorAlunos *vetor_alunos = criaVetorAlunos(2);
-  char nomes[2][100] = {"Aluno 1", "Aluno 2"};
-  int idades[2] = {10, 11};
+  Aluno **vetAluno = calloc(2, sizeof(Aluno*));
+  vetAluno[0] = criarAluno("Aluno 1", 15);
+  printf("%s - %d\n", vetAluno[0]->nome, vetAluno[0]->idade);
 
-  vetor_alunos = popularVetorAlunos(vetor_alunos, nomes, idades);
+  VetorAlunos* vetAlunos = criarVetorAluno(10);
+  printf("Antes: %p - %d - %d\n", vetAlunos->vet[0]->nome, vetAlunos->size, vetAlunos->max);
 
-  printf("vetor_alunos[0] | nome: %s - idade: %d\n", vetor_alunos[0]->nome, vetor_alunos[0]->idade);
-  printf("vetor_alunos[1] | nome: %s - idade: %d\n", vetor_alunos[1]->nome, vetor_alunos[1]->idade);
+  adicionaAlunoNoVetor(&vetAlunos, vetAluno[0]);
 
-  free(vetor_alunos[1]);
-  free(vetor_alunos[0]);
-  free(vetor_alunos);
-  vetor_alunos = NULL;
+  printf("Depois: %s - %d - %d\n", vetAlunos->vet[0]->nome, vetAlunos->size, vetAlunos->max);
+
+  free(vetAluno);
+  vetAluno = NULL;
+
+  freeVetorAlunos(&vetAlunos);
+  printf("%d", vetAlunos == NULL);
 
   return 0;
 }
