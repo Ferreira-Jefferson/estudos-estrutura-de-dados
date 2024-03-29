@@ -41,21 +41,6 @@ struct float_vector {
   int size;
   float *data;
 }
-
-FloatVector* create(int capacity) {
-  FloatVector* vec = calloc(1, sizeof(FloatVector));
-  vec->capacity = capacity;
-  vec->size = 0;
-  vec->data = calloc(capacity, sizeof(float));
-  return vec;
-}
-
-void destroy(FloatVector** vector_ref) {
-  FloatVector* aux = *vector_ref;
-  free(aux->data);
-  free(aux);
-  *vector_ref = NULL;
-}
 ```
 
-- O vídeo se encerra com a implementação da **struct** e das funções **create** e **destroy**, o restante da implementação se encontra nos vídeos seguintes e aqui serão implementados em outros arquivos, mas convido você a tentar implementar as demais funções em _float_vector.h_, por conta própria antes de olhar a implementação concluída.
+- O vídeo se encerra com a implementação da **struct** apenas, o restante da implementação se encontra nos vídeos seguintes e aqui serão implementados em outros arquivos.
