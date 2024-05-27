@@ -3,3 +3,4 @@ Por fim é gerado uma pasta com a base para rodar os projetos seguindo uma estru
 
 - make: faz toda preparação do projeto, compilando o tudo o que é necessário
 - make run: executa o programa definido a diretiva run do arquivo Makefile
+- make clean_all: remove os arquivos e pastas de compilação, deixando somente a estrutura base do projeto

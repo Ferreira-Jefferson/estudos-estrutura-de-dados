@@ -36,3 +36,6 @@ clean:
 
 clean_apps:
 	rm -rf $(BIN)/*
+
+clean_all: clean clean_apps
+	rmdir obj	lib	bin
