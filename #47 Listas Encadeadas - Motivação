@@ -1,0 +1,33 @@
+## 47 Listas Encadeadas - Motivação
+
+# Situação Problema
+
+- Dado que temos um vetor de Alunos com 5 posições já preenchidas, desejamos inserir mais um elemento no final, como isso poderia ser feito?
+
+  - Uma solução seria usar o realloc, entretanto seu uso pode acarretar em alguns problemas como Memória não inicializada, Falha na realocação e Fragmentação de memória, por conta desse e outros motivos, seu uso é pouco indicado.
+  - Uma outra solução seria criar um novo vetor e copiar todos os itens do primeiro vetor para o segundo e adicionar o novo tem ao final, essa até é uma solução válida e em muitos caso pode ser utilizada, entretanto essa cópia tem um custo computacional e dependendo do tamanho do vetor o tradoff pode ser negativo.
+  - Outra solução possível seria criar um vetor bem grande, um dos problemas dessa abordagem é definir qual o tamanho ideal desse vetor, outro é o desperdício de recursos, tendo em vista que memória seria alocada sem ao menos ser usada, e mesmo que a memória seja "bem grande" ela ainda poderia ser totalmente ocupada o que acarretaria em outros problemas e medidas para esse caso deveriam ser tomadas antes do problema acontecer.
+
+- Como vimos temos diversas abordagens para esse problema, mas nenhuma das apresentadas consegue resolver sem gerar um outro problema e é exatamente para resolver este impasse que o conceito de lista ligada ou lista encadeada surgiu.
+
+# Lista Ligada/encadeada [Linked List]
+
+A ideia da lista ligada é simular a ordem de um vetor por meio de structs, a lista é um conjunto de nós que fazem referência ao item seguinte ou também ao anterior.
+
+![Linked List](./assets/linked_list.png)
+
+- Uma Lista é definida por:
+
+  - Nó: Possui o valor e uma referência para o próximo item (também pode apontar o item anterior)
+  - Head (Cabeça): Primeiro Nó da lista
+    - pode ser também um nó especial que aponta para o primeiro nó
+    - pode conter informações sobre a lista, como tamanho.
+  - Tail (Cauda): Último Nó da lista
+    - pode ser um nó especial que contém referência para o último nó da lista
+    - dependendo da arquitetura, manter a referência da tail permite inserir dados diretamente no final da lista
+
+- Existem 4 principais tipos de listas encadeadas
+  - Lista encadeada simples: um nó só possui referência para o nó seguinte e último aponta para NULL
+  - Lista circular: O nó da Cauda faz referência ao nó da Cabeça
+  - Lista duplamente encadeada: cada nó possui referência tanto para o próximo nó quanto para o nó anterior, sendo que o nó anterior da Cabeça é NULL e o nó seguinte da Cauda é NULL
+  - Lista circular duplamente encadeada: É uma lista duplamente encadeada em que a Cauda aponta para a Cabeça e a Cabeça aponta para a Cauda.
