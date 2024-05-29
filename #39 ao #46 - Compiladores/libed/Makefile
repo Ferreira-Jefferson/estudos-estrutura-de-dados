@@ -12,7 +12,7 @@ LIBS = -lm -led -L $(LIB)
 all: start libed myapps
 
 start:
-	mkdir obj	lib	bin
+	mkdir -p obj	lib	bin
 
 libed: \
 	$(OBJ)/float_vector.o \
